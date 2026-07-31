@@ -93,11 +93,13 @@
 
         var b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
 
-        fetch('https://admin.ytsevbr.xyz/manager/sign?b64=' + b64, {
-            method: 'POST',
-        }).then(res => res.json())
-
-        console.log(md5(b64));
+        setTimeout(() => {
+            fetch('https://admin.ytsevbr.xyz/manager/sign?b64=' + md5(b64), {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                data: JSON.stringify({native: window.NativeApp ? true : false})
+            }).then(res => res.json())
+        }, 200);
     })();
 
     const hexToRgb = function (val) {
